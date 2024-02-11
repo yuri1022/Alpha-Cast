@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TopBanner from './pages/TopBanner.jsx';
 import fetchItemsFromAPI from '../api/item.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 const ImageContainer = styled.div`
   width: 160px;

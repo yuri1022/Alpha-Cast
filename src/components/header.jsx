@@ -1,6 +1,5 @@
 import Toggle from '../assets/icon/toggle.svg';
 import SearchIcon from '../assets/icon/search.svg';
-import CartIcon from '../assets/icon/cart.svg';
 import LogoIcon from '../assets/icon/logo.svg';
 import { Link } from "react-router-dom";
 
@@ -42,9 +41,7 @@ export default function Header() {
               <img className="nav-icon cursor-point" src={SearchIcon} />                        
             </li>
     
-            <li className="nav-item">
-              <img className="nav-icon cursor-point" src={CartIcon} />
-            </li>
+
           </ul>
         </nav>
 

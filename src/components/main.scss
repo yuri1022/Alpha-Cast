@@ -110,6 +110,13 @@ section {
   display: block;
 }
 
+html,
+body,
+#root,
+.app {
+  height: 100%;
+}
+
 body {
   line-height: 1;
 }
