@@ -6,6 +6,7 @@ import ItemDetail from './components/pages/ItemDetail.jsx';
 import LoginPage from './components/pages/LoginPage.jsx';
 import SignUpPage from './components/pages/SignUpPage.jsx';
 import FavoritePage from './components/pages/FavoritePage.jsx';
+import MyPodcast from './components/pages/MyPodcast.jsx';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="item/:itemName" element={<ItemDetail />} />
           <Route path="category/:categoryName" element={<ItemCategory />} />
-          <Route path="customization" element={<FavoritePage />} />
+          <Route path="favorite" element={<FavoritePage />} />
+          <Route path="category/myplaylist" element={<MyPodcast />} />
 
         </Routes>
     </div>

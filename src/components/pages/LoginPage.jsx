@@ -60,7 +60,7 @@ export default function LoginPage () {
       </div>  
 
       <div className="login-left-btn" style={{position:'absolute',top:'50%',alignItems:'center',textAlign:'center',lineHeight:'18px',fontSize:'16px'}}>
-        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'#1ED760'}}>使用Spotify帳號登入</Button>
+        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'var(--positive)'}}>使用Spotify帳號登入</Button>
       </div>
 
         

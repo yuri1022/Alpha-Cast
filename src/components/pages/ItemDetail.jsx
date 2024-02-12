@@ -1,5 +1,4 @@
 import Header from "../header";
-import Footer from "../Footer/footer";
 import { ItemData } from "../../data/ItemData";
 import { useParams } from "react-router-dom";
 
@@ -19,7 +18,6 @@ const filteredItems = ItemData.filter((item) => item.id === itemName);
       <p className="item-description" style={{marginTop:'20px'}}>{item.info}</p>
       </div>
     ))}
-    <Footer />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import Header from "../header";
-import Footer from "../Footer/footer";
 
 export default function FavoritePage () {
 
@@ -7,8 +6,6 @@ export default function FavoritePage () {
     <>
     <Header />
     <div className="customization">我的最愛</div>
-
-    <Footer />
     </>
   );
 }

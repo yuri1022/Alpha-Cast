@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import Header from './header.jsx';
-import Footer from './Footer/footer.jsx'; // 這裡引入 Footer 元件
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import TopBanner from './pages/TopBanner.jsx';
 import fetchItemsFromAPI from '../api/item.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -96,15 +94,21 @@ export default function MainPage() {
     
    
       <>
+      <div className="homepage-container" style={{display:'flex'}}>
+        <div className="homepage-navbar">
       <Header />
-      <TopBanner />
-      <div className="items col col-8" style={{display:'flex'}}>
-        {items.map((item) => (
-        <Items key={item.id} item={item} />
-      ))}
       </div>
-
-      <Footer />
+        <div className="homepage-main">
+          <div className="homepage-title">
+          <h1>早安</h1>
+          </div>
+             <div className="homepage-items col col-8" style={{display:'flex'}}>
+           {items.map((item) => (
+           <Items key={item.id} item={item} />
+           ))}
+             </div>
+       </div>
+      </div>
       </>
       
   
