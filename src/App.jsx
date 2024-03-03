@@ -7,6 +7,8 @@ import LoginPage from './components/pages/LoginPage.jsx';
 import SignUpPage from './components/pages/SignUpPage.jsx';
 import FavoritePage from './components/pages/FavoritePage.jsx';
 import MyPodcast from './components/pages/MyPodcast.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.scss'
 
 
 function App() {
