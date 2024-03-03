@@ -1,10 +1,13 @@
+@import'./styles/header.scss';
+
 :root {
   --main-blue: #30A9DE;
   --main-green: #4CAF50;
   --main-orange-yellow: #F6AE2D;
   --main-red: #FF5050;
   --main-orange-light: #FF7F50;
-  --main-blue-grey: #718096
+  --main-blue-grey: #718096;
+  --grey-light: #F6F7F8;
 }
 
 body {

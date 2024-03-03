@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Header from './header.jsx';
+import Header from '../components/header.jsx';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -100,7 +100,7 @@ export default function MainPage() {
       </div>
         <div className="homepage-main">
           <div className="homepage-title">
-          <h1>早安</h1>
+
           </div>
              <div className="homepage-items col col-8" style={{display:'flex'}}>
            {items.map((item) => (

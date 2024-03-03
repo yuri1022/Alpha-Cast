@@ -1,0 +1,106 @@
+.homepage-navbar{
+  .site-header {
+      position: fixed;
+      z-index: 5;
+      background-color: var(--grey-light);
+      .header-container{
+      width: 16.25rem;
+      height: 100%;
+      .header-logo-container{
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        .nav-link{
+          .nav-icon{
+            background-color: transparent;
+            width: 10.625rem;
+            margin-top: 2.5rem;
+          }
+        }
+      }
+      .header-navbar{
+        .navbar-menu{
+          width: 12.25rem; 
+          height:21.375rem; 
+          margin:8rem 1rem 1rem 2rem;
+          .nav-list{
+            margin: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--main-blue-grey);
+            align-items: flex-start;
+            .nav-item{
+              padding-bottom: 2.5rem;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              position: relative;
+              .nav-link{
+                display: flex;
+                align-items:baseline;
+                .nav-link-icon{
+                  font-size: 1.25rem;
+                  padding-right:0.6rem;
+ 
+                }
+              }
+              .nav-item-more{
+                margin-right: 0.5rem;                
+              }
+              .popup-menu{
+                display: block;
+                position: absolute;
+                top: 18%;
+                right: -78%;
+                background: #fff;
+                width:10.25rem;
+                height:8.5rem;
+                z-index: 2;
+                border-radius: 0.5rem;
+                .popup-menu-list{
+                  margin: 0.5rem 0.5rem 0 1rem;
+                  display:flex;
+                  flex-direction:column;
+                  align-items:start;
+                  font-weight:400;
+                  color:black;
+                  .popup-menu-item{
+                    padding: 0.5rem 0 1.4rem 0rem;
+                    position: relative;
+                    align-items: center;
+                  &:hover {
+                  .popup-menu-item-text {
+                      color: var(--main-orange-light);
+                      }
+
+                    }
+                    .popup-menu-separator{
+                      &::before {
+                          content: '';
+                          position: absolute;
+                          left: -30%;
+                          bottom: 11%;
+                          width: 10.24rem;
+                          height: 0.1rem;
+                          /* 調整分隔線的高度 */
+                          background-color: var(--grey-light);
+                        
+                          z-index: 1;
+                        }
+                    }
+                  }
+                }
+              }
+              
+            }
+          }
+        }
+      }
+      }
+    }
+}
+
+

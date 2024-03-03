@@ -1,5 +1,5 @@
-import Header from "../header";
-import { ItemData } from "../../data/ItemData";
+import Header from "../components/header";
+import { ItemData } from '../data/ItemData.jsx';
 import { useParams } from "react-router-dom";
 
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import BrandIcon from '../../assets/icon/alphacast.svg';
-import LoginImage1 from '../../assets/icon/login1.svg';
-import LoginImage2 from '../../assets/icon/login2.svg';
-import LoginImage3 from '../../assets/icon/login3.svg';
-import LeftArrow from '../../assets/icon/arrow-left.svg'
-import RightArrow from '../../assets/icon/arrow-right.svg'
-import ProgressOn from '../../assets/icon/progresson.svg'
-import ProgressOff from '../../assets/icon/progressoff.svg'
+import BrandIcon from '../assets/icon/alphacast.svg';
+import LoginImage1 from '../assets/icon/login1.svg';
+import LoginImage2 from '../assets/icon/login2.svg';
+import LoginImage3 from '../assets/icon/login3.svg';
+import LeftArrow from '../assets/icon/arrow-left.svg'
+import RightArrow from '../assets/icon/arrow-right.svg'
+import ProgressOn from '../assets/icon/progresson.svg'
+import ProgressOff from '../assets/icon/progressoff.svg'
 
 import { Button } from 'react-bootstrap';
 

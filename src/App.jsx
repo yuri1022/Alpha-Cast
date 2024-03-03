@@ -1,14 +1,14 @@
-import MainPage from './components/MainPage.jsx';
-import './styles/style.scss';
+import MainPage from './pages/MainPage.jsx';
+import './styles/main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ItemCategory from './components/pages/ItemCategory.jsx';
-import ItemDetail from './components/pages/ItemDetail.jsx';
-import LoginPage from './components/pages/LoginPage.jsx';
-import SignUpPage from './components/pages/SignUpPage.jsx';
-import FavoritePage from './components/pages/FavoritePage.jsx';
-import MyPodcast from './components/pages/MyPodcast.jsx';
+import ItemCategory from './pages/ItemCategory.jsx';
+import ItemDetail from './pages/ItemDetail.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+import FavoritePage from './pages/FavoritePage.jsx';
+import MyPodcast from './pages/MyPodcast.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.scss'
+import './app.scss';
 
 
 function App() {

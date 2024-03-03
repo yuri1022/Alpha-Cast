@@ -1,7 +1,7 @@
-import Header from "../header";
+import Header from "../components/header";
 
 
-export default function Contact () {
+export default function MyPodcast () {
 
   return(
     <>
