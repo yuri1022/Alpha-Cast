@@ -7,8 +7,11 @@ import LeftArrow from '../assets/icon/arrow-left.svg'
 import RightArrow from '../assets/icon/arrow-right.svg'
 import ProgressOn from '../assets/icon/progresson.svg'
 import ProgressOff from '../assets/icon/progressoff.svg'
+import * as script from '../api/script.js';  // 导入 script.js 文件
 
 import { Button } from 'react-bootstrap';
+
+
 
 const imageTexts = [
   {
@@ -35,6 +38,12 @@ export default function LoginPage () {
     const images = [LoginImage1, LoginImage2, LoginImage3];
     const totalImages = images.length;
 
+     const handleSpotifyLogin = () => {
+    // 用户点击 "使用 Spotify 帐号登录" 按钮时触发
+    // 调用 script.js 中的 redirectToSpotifyAuthorization 函数
+    script.redirectToSpotifyAuthorization();
+  };
+
 
     const handleArrowClick = (direction) => {
     if (direction === 'left') {
@@ -60,7 +69,7 @@ export default function LoginPage () {
       </div>  
 
       <div className="login-left-btn" style={{position:'absolute',top:'50%',alignItems:'center',textAlign:'center',lineHeight:'18px',fontSize:'16px'}}>
-        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'var(--positive)'}}>使用Spotify帳號登入</Button>
+        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'var(--positive)'}} onClick={handleSpotifyLogin}>使用Spotify帳號登入</Button>
       </div>
 
         

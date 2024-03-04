@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/header.jsx';
-import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemData } from '../data/ItemData.jsx';
+import PlayList from '../components/playinglist.jsx';
 
 
 const Items = ({ item }) =>{
@@ -14,8 +14,28 @@ const Items = ({ item }) =>{
     navigate(`/item/${item.id}`);
   };
 
-  return (
+  // const [users, setUsers] = useState([]); // 使用狀態來存儲資料
+
+  //   useEffect(() => {
+  //   const fetchItems = async () => {
+  //     try{
+  //   const itemsFromAPI = await fetchUserData();
+  //     setUsers(itemsFromAPI);
+  //     console.log(itemsFromAPI)
+
+  //   } catch(error){
+  //     console.error('error!',error);
     
+  //   }
+
+  //   };
+     
+
+  //   fetchItems();
+  // }, []); 
+
+  return (
+      
       <div className="div-container__info" key={item.id}
       onClick={handleButtonClick}>
         <card className="card" style={{width: '11.12rem',height:'16.625rem',margin:'1rem 1rem 1rem 0',borderRadius:'0.5rem',boxShadow: '24px 8px 24px rgba(199, 199, 199, 0.24)',border:'none'}}>
@@ -63,22 +83,7 @@ Items.propTypes = {
 };
 
 export default function MainPage() {
-  // const [items, setItems] = useState([]); // 使用狀態來存儲資料
 
-  // //   useEffect(() => {
-  // //   const fetchItems = async () => {
-  // //     try{
-  // //   const itemsFromAPI = await fetchItemsFromAPI();
-  // //     setItems(itemsFromAPI);
-  // //   } catch(error){
-  // //     console.error('error!',error);
-  // //   }
-
-  // //   };
-     
-
-  // //   fetchItems();
-  // // }, []); // 空的 dependency array 代表只在 mount 時執行
 
   return (
     
@@ -90,18 +95,19 @@ export default function MainPage() {
       </div>
 
  <div className="homepage-main col col-10" style={{display: 'flex', flexDirection: 'column'}}>
-    <div className="homepage-title" style={{margin: '2.5rem 0 0 0'}}>
+    <div className="homepage-title" style={{margin: '2.5rem 0 0 2rem'}}>
       <h4 className='title' style={{fontSize: '2rem', fontWeight: '700'}}>早安</h4>
     </div>
     <div className="homepage-item-container" style={{display: 'flex', flex: '1'}}>
-      <div className="homepage-items" style={{display: 'flex', margin: '1rem 1rem 0 0', flexWrap: 'wrap', flex: '2'}}>
+      <div className="homepage-items" style={{display: 'flex', margin: '1rem -1rem 0 2rem', flexWrap: 'wrap', flex: '3'}}>
         {ItemData.map((item) => (
           <Items key={item.id} item={item} />
         ))}
       </div>
-      <div className="homepage-playing" style={{flex: '1'}}>
+      <div className="homepage-playing" style={{flex: '1.7'}}>
         <div>
-          <h2>我是撥放器</h2>
+      
+          <PlayList />
         </div>
       </div>
     </div>
