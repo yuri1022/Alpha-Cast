@@ -35,10 +35,10 @@ export default function Header() {
               .header-container::after {
                 content: '';
                 position: absolute;
-                top: 92px;
-                left: 36px;
-                width: 196px;
-                height: 1px; 
+                top: 5.5rem;
+                left: 1rem;
+                width: 12.25rem;
+                height: 0.06rem; 
                 background-color: var(--grey-300); 
               }
             `}
