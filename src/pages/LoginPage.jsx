@@ -39,8 +39,10 @@ export default function LoginPage () {
     const totalImages = images.length;
 
      const handleSpotifyLogin = () => {
-    // 用户点击 "使用 Spotify 帐号登录" 按钮时触发
-    // 调用 script.js 中的 redirectToSpotifyAuthorization 函数
+      
+if (!window.location.search.includes("code")) {
+    script.redirectToSpotifyAuthorization();
+  }
     script.redirectToSpotifyAuthorization();
   };
 

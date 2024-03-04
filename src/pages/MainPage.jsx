@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemData } from '../data/ItemData.jsx';
 import PlayList from '../components/playinglist.jsx';
+import * as script from '../api/script.js';  // 导入 script.js 文件
+
 
 
 const Items = ({ item }) =>{
@@ -14,25 +16,26 @@ const Items = ({ item }) =>{
     navigate(`/item/${item.id}`);
   };
 
-  // const [users, setUsers] = useState([]); // 使用狀態來存儲資料
+//   const [users, setUsers] = useState([]); // 使用狀態來存儲資料
 
-  //   useEffect(() => {
-  //   const fetchItems = async () => {
-  //     try{
-  //   const itemsFromAPI = await fetchUserData();
-  //     setUsers(itemsFromAPI);
-  //     console.log(itemsFromAPI)
+//   async function fetchUserData(accessToken) {
+//   try {
+//     const response = await axios.get(`${api}/api/me`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
 
-  //   } catch(error){
-  //     console.error('error!',error);
-    
-  //   }
-
-  //   };
+//     return response.data; // 返回包含用户数据的对象
+//   } catch (error) {
+//     console.error('Error fetching user data:', error);
+//     return null;
+//   }
+// }
      
 
-  //   fetchItems();
-  // }, []); 
+//     fetchItems();
+//   }, []); 
 
   return (
       
