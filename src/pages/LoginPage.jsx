@@ -7,7 +7,12 @@ import LeftArrow from '../assets/icon/arrow-left.svg'
 import RightArrow from '../assets/icon/arrow-right.svg'
 import ProgressOn from '../assets/icon/progresson.svg'
 import ProgressOff from '../assets/icon/progressoff.svg'
-import * as script from '../api/script.js';  // 导入 script.js 文件
+import { getSpotifyAuth, getRefreshToken } from "../api/auth.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../context/useauth.jsx";
+ 
+
 
 import { Button } from 'react-bootstrap';
 
@@ -37,13 +42,27 @@ export default function LoginPage () {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const images = [LoginImage1, LoginImage2, LoginImage3];
     const totalImages = images.length;
+    const { isAuth, setIsAuth } = useAuth();
+    const navigate = useNavigate();
 
-     const handleSpotifyLogin = () => {
-      
-if (!window.location.search.includes("code")) {
-    script.redirectToSpotifyAuthorization();
-  }
-    script.redirectToSpotifyAuthorization();
+    useEffect(() => {
+    const checkToken = async () => {
+      if (isAuth) {
+        try {
+          const spotifyRefreshToken = await getRefreshToken();
+          if (spotifyRefreshToken) navigate("/mypage");
+          setIsAuth(true);
+        } catch (err) {
+          setIsAuth(false);
+          throw new Error(`取得refresh token失敗${err}`);
+        }
+      }
+    };
+    checkToken();
+  }, [isAuth, setIsAuth, navigate]);
+
+  const handleClick = () => {
+    getSpotifyAuth();
   };
 
 
@@ -71,7 +90,7 @@ if (!window.location.search.includes("code")) {
       </div>  
 
       <div className="login-left-btn" style={{position:'absolute',top:'50%',alignItems:'center',textAlign:'center',lineHeight:'18px',fontSize:'16px'}}>
-        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'var(--positive)'}} onClick={handleSpotifyLogin}>使用Spotify帳號登入</Button>
+        <Button className="btn btn-secondary" style={{width:'422px',height:'73px',backgroundColor:'var(--positive)'}} onClick={handleClick}>使用Spotify帳號登入</Button>
       </div>
 
         

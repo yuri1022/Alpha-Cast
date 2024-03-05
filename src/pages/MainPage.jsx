@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemData } from '../data/ItemData.jsx';
 import PlayList from '../components/playinglist.jsx';
-import * as script from '../api/script.js';  // 导入 script.js 文件
+import * as script from '../api/auth.js';  // 导入 script.js 文件
 
 
 
