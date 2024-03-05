@@ -3,6 +3,7 @@ import './styles/main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ItemCategory from './pages/ItemCategory.jsx';
 import ItemDetail from './pages/ItemDetail.jsx';
+import CallbackPage from "./pages/CallbackPage";
 import LoginPage from './pages/LoginPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import FavoritePage from './pages/FavoritePage.jsx';
@@ -22,6 +23,7 @@ function App() {
        <Routes>       
           <Route path="home" element={<MainPage />} />
           <Route path="*" element={<MainPage />} />
+          <Route path="/callback" element={<CallbackPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="item/:itemName" element={<ItemDetail />} />

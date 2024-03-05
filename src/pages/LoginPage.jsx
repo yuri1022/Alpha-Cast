@@ -11,6 +11,7 @@ import { getSpotifyAuth, getRefreshToken } from "../api/auth.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../context/useauth.jsx";
+
  
 
 
@@ -45,12 +46,12 @@ export default function LoginPage () {
     const { isAuth, setIsAuth } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
+  useEffect(() => {
     const checkToken = async () => {
       if (isAuth) {
         try {
           const spotifyRefreshToken = await getRefreshToken();
-          if (spotifyRefreshToken) navigate("/mypage");
+          if (spotifyRefreshToken) navigate("/home");
           setIsAuth(true);
         } catch (err) {
           setIsAuth(false);
@@ -64,7 +65,6 @@ export default function LoginPage () {
   const handleClick = () => {
     getSpotifyAuth();
   };
-
 
     const handleArrowClick = (direction) => {
     if (direction === 'left') {

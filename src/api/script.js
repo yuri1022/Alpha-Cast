@@ -40,7 +40,7 @@ export const getCategory = async () => {
   try {
     const { data } = await acApi.get("api/categories");
     // 測試用
-    // console.log(data);
+    console.log(data);
     return data.categories;
   } catch (err) {
     throw new Error(`無法取得使用者分類清單 ${err}`);

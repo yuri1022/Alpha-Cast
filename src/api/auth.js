@@ -47,7 +47,7 @@ export const getAccessToken = async (code) => {
       Cookies.set("access_token", data.access_token);
       Cookies.set("refresh_token", data.refresh_token);
       // 測試用
-      // console.log(data);
+      console.log(data);
       return data.access_token;
     }
   } catch (err) {
@@ -69,7 +69,9 @@ export const getRefreshToken = async () => {
   try {
     const { data } = await axios.post(url, params, { headers });
     Cookies.set("access_token", data.access_token);
+    console.log(data.access_token);
     return data.access_token;
+    
   } catch (err) {
     throw new Error(`無法取得新的Spotify認證碼(RefreshToken) ${err}`);
   }
@@ -81,7 +83,7 @@ export const getProfile = async () => {
     const { data } = await axios.get("https://api.spotify.com/v1/me", {
       headers: { Authorization: `Bearer ${Cookies.get("access_token")}` },
     });
-    // console.log(data);
+    console.log(data);
     return data;
   } catch (err) {
     throw new Error(`取得使用者個人資料失敗 ${err}`);
