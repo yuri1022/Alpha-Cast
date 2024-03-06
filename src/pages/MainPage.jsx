@@ -8,24 +8,29 @@ import PlayList from '../components/playinglist.jsx';
 import useAuth from '../context/useauth.jsx';
 import { getProfile } from '../api/auth.js';
 import ProfileBar from '../components/ProfileBar.jsx';
-
+import ApiContext from '../context/ApiContext.jsx';
+import { useContext } from 'react';
 
 const Items = ({ item }) =>{
    const navigate = useNavigate();
+
   const handleButtonClick = () => {
     // 在這裡執行導航
     navigate(`/item/${item.id}`);
   };
 
+
+
   return (
-      
+        
+
       <div className="div-container__info" key={item.id}
       onClick={handleButtonClick}>
         <card className="card" style={{width: '11.12rem',height:'16.625rem',margin:'1rem 1rem 1rem 0',borderRadius:'0.5rem',boxShadow: '24px 8px 24px rgba(199, 199, 199, 0.24)',border:'none'}}>
         <div className="item-card" style={{ display: 'flex', justifyContent:'center'}}>
           <div className="item-card-img-container" style={{width:'9rem',height:'9rem',margin:'1rem'}}>
           <img src={item.avatar} alt="pic" style={{width: '100%', height: '100%', objectFit: 'cover',borderRadius:'0.66rem'}}/>
-          </div>      
+          </div>     
 
         </div>
 

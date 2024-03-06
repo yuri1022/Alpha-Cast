@@ -9,6 +9,7 @@ export function ApiProvider({ children }) {
   const [myCategory, setMyCategory] = useState([]);
   const [favoriteEp, setFavoriteEp] = useState([]);
   const [nowPlayingEp, setNowPlayingEp] = useState("");
+
   const { isAuth } = useAuth();
 
   const getFavorite = useCallback(async () => {
@@ -40,7 +41,7 @@ export function ApiProvider({ children }) {
     if (!isAuth) return;
     getFavorite();
     getMyCategory();
-  }, [getFavorite, getMyCategory, isAuth]);
+  }, [getFavorite, getMyCategory, isAuth,]);
 
   return (
     <ApiContext.Provider
@@ -50,7 +51,7 @@ export function ApiProvider({ children }) {
         favoriteEp,
         setFavoriteEp,
         nowPlayingEp,
-        setNowPlayingEp,
+        setNowPlayingEp,      
       }}
     >
       {children}

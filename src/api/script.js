@@ -38,10 +38,11 @@ export const register = async (token) => {
 
 export const getCategory = async () => {
   try {
-    const { data } = await acApi.get("api/categories");
+    const data = await acApi.get("api/categories");
     // 測試用
-    console.log(data);
-    return data.categories;
+    const categories = data.data.categories;
+    console.log('getCategory', categories);
+    return categories;
   } catch (err) {
     throw new Error(`無法取得使用者分類清單 ${err}`);
   }
@@ -52,9 +53,10 @@ export const createCategory = async (name) => {
     const { data } = await acApi.post("api/categories", {
       name,
     });
-    // 測試用
-    // console.log(data);
-    return data.success;
+    // 假设后端返回了更新后的类别列表
+    console.log(data);
+    return data;
+    
   } catch (err) {
     throw new Error(`建立新的分類失敗 ${err}`);
   }

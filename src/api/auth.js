@@ -104,6 +104,20 @@ export const searchShow = async (word) => {
   }
 };
 
+// 修改後的搜尋節目函數，用於取得所有公共節目
+export const getAllPublicShows = async () => {
+  const url = "https://api.spotify.com/v1/search?type=show";
+  try {
+    const { data } = await axios.get(url, {
+      headers: { Authorization: `Bearer ${Cookies.get("access_token")}` },
+    });
+    console.log(data);
+    return data.shows;
+  } catch (err) {
+    throw new Error(`取得公共節目列表失敗 ${err}`);
+  }
+};
+
 export const getShow = async (id) => {
   const url = `https://api.spotify.com/v1/shows/${id}`;
   try {
@@ -140,5 +154,17 @@ export const getEpisodes = async (id) => {
     return data;
   } catch (err) {
     throw new Error(`取得Podcast資訊失敗 ${err}`);
+  }
+};
+
+export const getUserPlaylists = async () => {
+  try {
+    const { data } = await axios.get("https://api.spotify.com/v1/me/playlists", {
+      headers: { Authorization: `Bearer ${Cookies.get("access_token")}` },
+    });
+    console.log(data.items); // 這裡的 items 包含了用戶的所有播放列表，其中可能包含 Podcast 列表
+    return data.items;
+  } catch (err) {
+    throw new Error(`取得使用者播放列表失敗 ${err}`);
   }
 };

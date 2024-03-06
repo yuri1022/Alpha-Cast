@@ -1,18 +1,43 @@
+//header.jsx
 import BrandIcon from '../assets/icon/alphacast.svg';
 import { Link } from "react-router-dom";
-import PlusIcon from '../assets/icon/plus.svg';
-import { Button } from 'react-bootstrap';
 import MoreIcon from '../assets/icon/more.svg';
 import { useState } from 'react';
 import '../styles/header.scss';
+import { useEffect } from 'react';
+import useApi from '../context/useApi';  
+import AddNewCategoryModal from './AddCategoryModal';
+import EditCategoryBtn from './EditCategoryBtn';
+
 
 
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
+  const [categories, setCategories] = useState([]);
+  const { myCategory, nowCategory } = useApi();
+ 
+ const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+
+  const renderedCategoryList = myCategory?.map((list) => {
+    const splitName = list.name.split(",");
+    // 測試用
+    // console.log(splitName);
+    return (
+      <EditCategoryBtn
+        key={list.id}
+        name={splitName[0]}
+        icon={splitName[1]}
+        id={list.id}
+      />
+    );
+  });
+
+
+
+  
 
   return (
     <>
@@ -134,26 +159,18 @@ export default function Header() {
               onClick={toggleMenu}/>
             </li>
 
-
-            <li className="nav-item" style={{paddingBottom:'2.5rem',display:'flex',justifyContent:'space-between', width:'100%'}}>
-              <Link to="#" className="nav-link">
-                <Button variant="outline-primary" style={{display:'flex',border:"0.125rem solid var(--main-blue)",borderRadius:'0.75rem',color:'var(--main-blue)',width:'12.25rem',height:'2.93rem',margin:'0 0 0 -0.5rem'}}>
-                  <img className="nav-item-plus" style={{margin:'0.3rem 0 0 0'}} src={PlusIcon} alt="plus" />
-                  <div className="nav-item-text" style={{fontSize:'0.875rem',fontWeight:'500',margin:'0.3rem 0 0 0.2rem'}}>新增分類</div>
-                </Button>
-                </Link>
-            </li>
-
-
           </ul>
-        
+        <AddNewCategoryModal />
 
         </nav>
         </div>   
-
-
+        {renderedCategoryList}
+      
       </div>
+      
     </header>
+    
+      
     </>
   );
 }

@@ -15,7 +15,7 @@ const [categories, setCategories] = useState([]);
     };
     console.log(categories);
     fetchCategories();
-  }, []);
+  }, [categories]);
 
   return (
     <div>
