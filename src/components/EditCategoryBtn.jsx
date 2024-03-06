@@ -24,14 +24,13 @@ export default function EditCategoryBtn({ icon, name, id }) {
     <>
       <div
         className="w-100 d-flex justify-content-between py-3 btn btn-outline-dark border-0 border-rounded-lg"
-        style={btnActive}
         onClick={() => {
           navigate(`/mypage/show/${id}`);
         }}
       >
-        <div className="d-flex fs-4 align-items-center gap-4 ">
+        <div className="d-flex fs-4 align-items-center gap-3 ">
           <Emoji unified={icon} size="20" />
-          <div>{name}</div>
+          <div style={{fontSize:'0.875rem',fontWeight:'500'}}>{name}</div>
         </div>
         <CategoryDropdown icon={icon} name={name} id={id} />
       </div>
@@ -44,26 +43,28 @@ function CategoryDropdown({ icon, name, id }) {
   const [deleteShow, setDeleteShow] = useState(false);
   const [addShow, setAddShow] = useState(false);
 
-  const dropddownClass = "h4 mb-0 py-4 px-4";
+  const dropdownClass = "menu-item h4 mb-2 mt-2 py-2 px-5 ";
   return (
     <>
       <Dropdown>
-        <Dropdown.Toggle variant="none" bsPrefix="none">
-          <FiMoreVertical className="fs-2" />
+        <Dropdown.Toggle bsPrefix="none" variant="none" style={{marginRight:'-0.78rem',color:'var(--main-blue-grey)'}}>
+          <FiMoreVertical className="fs-5" />
         </Dropdown.Toggle>
-        <Dropdown.Menu className="py-0 border-0 shadow-sm">
+        <Dropdown.Menu className="py-0 border-0 shadow-sm " >
           <Dropdown.Item
-            className={dropddownClass}
-            style={{ color: "#FF7F50" }}
+            className={dropdownClass}
+            style={{ fontSize:'1rem' }}
           >
             <p onClick={() => setEditShow(true)}>編輯名稱</p>
           </Dropdown.Item>
           <Dropdown.Divider style={{ borderColor: "#EBEBEB" }} />
-          <Dropdown.Item className={dropddownClass}>
+          <Dropdown.Item className={dropdownClass}
+           style={{ fontSize:'1rem' }}>
             <p onClick={() => setDeleteShow(true)}>刪除分類</p>
           </Dropdown.Item>
           <Dropdown.Divider style={{ borderColor: "#EBEBEB" }} />
-          <Dropdown.Item className={dropddownClass}>
+          <Dropdown.Item className={dropdownClass}
+          style={{ fontSize:'1rem' }}>
             <p onClick={() => setAddShow(true)}>新增Podcast</p>
           </Dropdown.Item>
         </Dropdown.Menu>
@@ -167,7 +168,7 @@ function EditCategoryModal({ show, setEditShow, name, icon, id }) {
       show={show}
       handleClose={() => setEditShow(false)}
       handleSaveClick={onEditClick}
-      title="編輯分類"
+      title="編輯名稱"
       input={inputText}
       body={
         <div className="d-flex gap-3">

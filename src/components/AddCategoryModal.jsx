@@ -37,16 +37,23 @@ const updatedCategory = await createCategory(categoryName);
     }
   };
   return (
-    <div className="add-category" style={{zIndex:'100'}}>
+    <div className="add-category" style={{zIndex:'5'}}>
       <button
-        className="btn btn-outline-info col-12 px-4 fs-4 hover_text_white border-rounded-lg border-2 mb-3"
+        className="btn btn-outline-info col-12 mt-4"
+        style={{
+        color:'var(--main-blue)',
+        height:'rem',
+        border:'0.125rem solid var(--main-blue)', 
+        borderRadius:'0.75rem'
+        }}
+       
         onClick={() => {
           setShowModal(true);
         }}
       >
-        <div className="d-flex align-items-center gap-3">
-          <p className="fs-1">&#43;</p>
-          <p>新增分類</p>
+        <div className="d-flex align-items-center gap-3 " style={{marginLeft:'1rem'}}>
+          <p style={{fontSize:'2rem'}}>&#43;</p>
+          <p style={{fontSize:'0.875rem',fontWeight:'500'}}>新增分類</p>
         </div>
       </button>
       <CategoryModal

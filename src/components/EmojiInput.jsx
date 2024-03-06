@@ -12,8 +12,11 @@ export default function EmojiInput({ setEmoji, value }) {
 
 
   return (
-    <div className="bg-light border-rounded-lg p-2">
-      <div onClick={() => setEmojiOpen(true)} style={{ cursor: "pointer" }}>
+    <div className="bg-light border-rounded-sm p-2"
+                style={{backgroundColor:'var(--grey-light)',border:'none',
+                borderRadius:'0.5rem',height:'87%',width:'10%'}}>
+      <div style={{margin:'0.4rem 0 0.4rem 0.2rem',cursor: "pointer"}}
+      onClick={() => setEmojiOpen(true)}>
         <Emoji unified={value} size="25" />
       </div>
       {emojiOpen && (
@@ -24,6 +27,7 @@ export default function EmojiInput({ setEmoji, value }) {
             width={300}
             height={400}
             className="position-absolute"
+
           />
         </div>
       )}

@@ -70,101 +70,14 @@ export default function Header() {
           </style>
 
         <div className="header-navbar">   
-        <nav className="navbar-menu">
+        <nav className="navbar-menu" style={{paddingRight:'1rem'}}>
 
-          <ul className="nav-list site-menu-list mr-auto" >
-
-
-            <li className="nav-item" >
-              <Link to="/category/commuting" className="nav-link" >
-                <div className="nav-link-icon" >🚌</div>
-                <div className="nav-link-text">通勤清單</div>
-               </Link>
-              <img className="nav-item-more" 
-              src={MoreIcon} alt="more" 
-               onClick={toggleMenu}/>
-                {isMenuOpen && (
-            <div className="popup-menu">
-              <div className="popup-menu-list" >
-              <div className="popup-menu-item" >
-                
-              <div className="popup-menu-item-text">編輯名稱</div>
-              <div className="popup-menu-separator"></div>
-              
-              </div>
-
-              <div className="popup-menu-item" >                
-              <div className="popup-menu-item-text">刪除分類</div>
-              <div className="popup-menu-separator"></div>
-                </div>
-
-              <div className="popup-menu-item" >
-              <div className="popup-menu-item-text">新增PodCast</div>
-              
-              </div>
-              </div>
-
-              {/* 彈出選單的內容，包括等選項 */}
-              {/* 可以使用React-Bootstrap的Dropdown或者自己設計一個 */}
-            </div>
-          )}
-            </li>
-
-
-            <li className="nav-item" style={{paddingBottom:'2.5rem',display:'flex',justifyContent:'space-between', width:'100%'}}>
-               <Link to="/category/learning" className="nav-link" style={{display:'flex',alignItems:'baseline'}}>
-                <div className="nav-link-icon" style={{fontSize:'1.25rem',paddingRight:'0.6rem'}}>📚</div>
-                <div className="nav-link-text">學習清單</div>
-                </Link>
-               <img className="nav-item-more" 
-               src={MoreIcon} alt="more"    
-               onClick={toggleMenu}/>
-            </li>
-
-
-            <li className="nav-item" style={{paddingBottom:'2.5rem',display:'flex', justifyContent:'space-between',width:'100%'}}>
-              <Link to="/category/sleeping" className="nav-link" style={{display:'flex',alignItems:'baseline'}}>
-               <div className="nav-link-icon" style={{fontSize:'1.25rem',paddingRight:'0.6rem'}}>💤</div>
-                <div className="nav-link-text">睡前清單</div>                
-                
-                </Link>
-              <img className="nav-item-more" 
-              style={{marginRight:'0.5rem'}} 
-              src={MoreIcon} alt="more" 
-              onClick={toggleMenu}/>
-            </li>
-
-
-            <li className="nav-item" style={{paddingBottom:'2.5rem',display:'flex', justifyContent:'space-between',width:'100%'}}>
-              <Link to="/category/myplaylist" className="nav-link" style={{display:'flex',alignItems:'baseline'}}>
-                <div className="nav-link-icon" style={{fontSize:'1.25rem',paddingRight:'0.6rem'}}>🏘️</div>
-                <div className="nav-link-text">我的Podcast</div>                    
-                
-               </Link>
-              <img className="nav-item-more"  
-              style={{marginRight:'0.5rem'}} 
-              src={MoreIcon} alt="more" 
-              onClick={toggleMenu}/>
-            </li>
-
-
-            <li className="nav-item" style={{paddingBottom:'2.5rem',display:'flex', justifyContent:'space-between',width:'100%'}}>
-              <Link to="/category/favorite" className="nav-link" style={{display:'flex',alignItems:'baseline'}}>
-                <div className="nav-link-icon" style={{fontSize:'1.25rem',paddingRight:'0.6rem'}}>❤️</div>
-                <div className="nav-link-text">已收藏</div>                   
-                </Link>
-              <img className="nav-item-more" 
-              style={{marginRight:'0.5rem'}} 
-              src={MoreIcon} alt="more" 
-              onClick={toggleMenu}/>
-            </li>
-
-          </ul>
+        {renderedCategoryList}
         <AddNewCategoryModal />
 
         </nav>
         </div>   
-        {renderedCategoryList}
+        
       
       </div>
       
