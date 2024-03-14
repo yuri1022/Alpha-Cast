@@ -1,13 +1,12 @@
 //header.jsx
 import BrandIcon from '../assets/icon/alphacast.svg';
 import { Link } from "react-router-dom";
-import MoreIcon from '../assets/icon/more.svg';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import '../styles/header.scss';
-import { useEffect } from 'react';
 import useApi from '../context/useApi';  
 import AddNewCategoryModal from './AddCategoryModal';
 import EditCategoryBtn from './EditCategoryBtn';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -25,6 +24,7 @@ export default function Header() {
     const splitName = list.name.split(",");
     // 測試用
     // console.log(splitName);
+    console.log(list);
     return (
       <EditCategoryBtn
         key={list.id}

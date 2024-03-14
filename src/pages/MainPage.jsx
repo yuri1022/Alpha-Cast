@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react';
 import Header from '../components/header.jsx';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemData } from '../data/ItemData.jsx';
 import PlayList from '../components/playinglist.jsx';
-import useAuth from '../context/useauth.jsx';
-import { getProfile } from '../api/auth.js';
 import ProfileBar from '../components/ProfileBar.jsx';
-import ApiContext from '../context/ApiContext.jsx';
-import { useContext } from 'react';
+import Greeting from '../components/Greeting.jsx';
 
 const Items = ({ item }) =>{
    const navigate = useNavigate();
@@ -71,27 +67,7 @@ Items.propTypes = {
 };
 
 export default function MainPage() {
-  const { isAuth, user } = useAuth();
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const userProfile = await getProfile();
-        setProfile(userProfile);
-        setLoading(false);  // 資料載入完成後設置 loading 為 false
-      } catch (error) {
-        console.error("Error fetching user profile:", error.message);
-        setLoading(false);  // 發生錯誤時也要確保將 loading 設置為 false
-      }
-    };
-
-    if (isAuth) {
-      fetchProfile();
-    }
-  }, [isAuth]);
 
 
   return (
@@ -105,9 +81,9 @@ export default function MainPage() {
 
  <div className="homepage-main col col-10" style={{display: 'flex', flexDirection: 'column'}}>
     <div className="homepage-title" style={{margin: '2.5rem 8.5rem 0 2rem',display:'flex',justifyContent:'space-between'}}>
-      <h4 className='title' style={{fontSize: '2rem', fontWeight: '700'}}>早安</h4>
+      <h4 className='title' style={{fontSize: '2rem', fontWeight: '700'}}><Greeting /></h4>
       <div className='profile-bar'>
-      <ProfileBar profile={profile} isAuth={isAuth} loading={loading}/>
+      <ProfileBar />
       </div>
 
 

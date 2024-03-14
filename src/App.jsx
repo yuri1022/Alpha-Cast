@@ -26,10 +26,8 @@ function App() {
           <Route path="/callback" element={<CallbackPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
-          <Route path="item/:itemName" element={<ItemDetail />} />
-          <Route path="category/:categoryName" element={<ItemCategory />} />
           <Route path="favorite" element={<FavoritePage />} />
-          <Route path="category/myplaylist" element={<MyPodcast />} />
+          <Route path="mypage/show/:id" element={<MyPodcast />} />
 
         </Routes>
     </div>
