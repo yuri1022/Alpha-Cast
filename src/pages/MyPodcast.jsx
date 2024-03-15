@@ -4,7 +4,7 @@ import SearchPodcast from './SearchPodcast.jsx';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header.jsx';
 import { getShow } from '../api/auth.js';
-import { Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Greeting from '../components/Greeting.jsx';
 import ProfileBar from '../components/ProfileBar.jsx';
 import PlayList from '../components/playinglist.jsx';
@@ -14,6 +14,8 @@ const MyPodcast = () => {
   const [category,setCategories] = useState('');
   const [podCast,setPodcast] = useState([]);
   const [openSearchModal,setOpenSearchModal] = useState(false);
+  // const [viewType, setViewType] = useState('list'); 
+
   const { id } = useParams();
 
  const handleOpenSearch = () => {
@@ -22,6 +24,13 @@ const MyPodcast = () => {
 
   const handleCloseSearch = () => {
    setOpenSearchModal(false);
+  };
+
+   const formatDuration = (duration_ms) => {
+    const totalSeconds = duration_ms / 1000;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    return `${hours}小時${minutes}分`;
   };
  
    const fetchCategoryData = async () => {
@@ -83,19 +92,29 @@ useEffect(() => {
     </div>
 
      <div className="homepage-item-container" style={{display: 'flex', flex: '1'}}>
-      <div className="homepage-items" style={{display: 'flex', margin: '1rem -1rem 0 2rem', flexWrap: 'wrap', flex: '3'}}>
+      <div className="homepage-items" style={{display: 'flex', margin: '1rem 1rem 0 2rem', flexWrap: 'wrap', flex: '3'}}>
 
         {podCast && podCast.map((p) => (
-            <div className="podcast-card d-flex" key={p.id}>
-              <div className="podcast-img-container">
-              <img src={p.images[1].url} alt="img" />
+            <div className="podcast-card d-flex" key={p.id} style={{width:'100%',height:'9.43rem',margin:'0.5rem',border:'1px solid var(--main-orange-light)',borderRadius:'1rem'}}>
+              <div className="podcast-img-container d-flex" style={{alignItems:'center',margin:'0.1rem 0.5rem 1.5rem 0.5rem'}}>
+              <img src={p.images[1].url} alt="img" style={{height:'6rem',width:'6rem',borderRadius:'0.5rem'}}/>
               </div>
 
-            <div className="podcast-info-container">
-              <h3>{p.name}</h3>
-              <p>发布者：{p.publisher}</p>
-              <p>{p.description}</p>
+            <div className="podcast-info-container d-flex mt-3" style={{flexDirection:'column',alignItems:'flex-start'}}>
+              <h3 className="podcast-title" style={{fontWeight:'700'}}>{p.name}</h3>
+              <p className="podcast-author" style={{fontSize:'0.875rem'}}>{p.publisher}</p>
+              <p className="podcast-description" style={{fontSize:'0.875rem'}}>{p.description.substring(0,100)}...</p>
+
+                <div className="podcast-player">
+                      <p>時長: {formatDuration(p.episodes.items[0].duration_ms)}</p>
+                      <audio controls>
+                        <source src={p.episodes.items[0].audio_preview_url} type="audio/mpeg" />
+                        您的瀏覽器
+                      </audio>
+                    </div>
             </div>
+
+
 
               
             </div>
@@ -108,14 +127,18 @@ useEffect(() => {
           <PlayList />
         </div>
       </div>
+
     </div>
-
-
-      <button onClick={handleOpenSearch}>請搜尋並新增PodCast</button>
+    
+    <div className="search-btn col-6" style={{marginLeft:'2.2rem'}}>
+      <Button onClick={handleOpenSearch}>新增PodCast</Button>
       {openSearchModal && <SearchPodcast show={openSearchModal} onClose={handleCloseSearch} />
       }
 
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>}    
+    </div>
+
+
     
 
 
