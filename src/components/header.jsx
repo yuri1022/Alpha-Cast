@@ -6,8 +6,6 @@ import '../styles/header.scss';
 import useApi from '../context/useApi';  
 import AddNewCategoryModal from './AddCategoryModal';
 import EditCategoryBtn from './EditCategoryBtn';
-import { useParams } from 'react-router-dom';
-
 
 
 
@@ -19,12 +17,14 @@ export default function Header() {
  const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  
 
   const renderedCategoryList = myCategory?.map((list) => {
     const splitName = list.name.split(",");
+    
     // 測試用
     // console.log(splitName);
-    console.log(list);
+    // console.log(list);
     return (
       <EditCategoryBtn
         key={list.id}
@@ -41,6 +41,7 @@ export default function Header() {
 
   return (
     <>
+
     <header className="site-header" >
      
       <div className="header-container mx-auto">

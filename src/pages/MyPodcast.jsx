@@ -69,7 +69,7 @@ useEffect(() => {
 }, [category.savedShows]);
 
 useEffect(() => {
-  console.log(podCast);
+  // console.log(podCast);
 }, [podCast]);
 
 

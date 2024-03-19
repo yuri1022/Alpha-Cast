@@ -97,7 +97,7 @@ export const searchShow = async (word) => {
     const { data } = await axios.get(url, {
       headers: { Authorization: `Bearer ${Cookies.get("access_token")}` },
     });
-    console.log(data);
+    // console.log(data);
     return data.shows;
   } catch (err) {
     throw new Error(`搜尋節目失敗 ${err}`);
