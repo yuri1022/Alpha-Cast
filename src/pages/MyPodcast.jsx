@@ -8,14 +8,22 @@ import { Button } from 'react-bootstrap';
 import Greeting from '../components/Greeting.jsx';
 import ProfileBar from '../components/ProfileBar.jsx';
 import PlayList from '../components/playinglist.jsx';
+import { isEqual } from 'lodash';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+import '../styles/playinglist.scss';
+
+
 
 const MyPodcast = () => {
   const [error, setError] = useState(null);
   const [category,setCategories] = useState('');
   const [podCast,setPodcast] = useState([]);
   const [openSearchModal,setOpenSearchModal] = useState(false);
-  // const [viewType, setViewType] = useState('list'); 
+  const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
+  const [activePlayer, setActivePlayer] = useState(null);
 
+  // const [viewType, setViewType] = useState('list'); 
   const { id } = useParams();
 
  const handleOpenSearch = () => {
@@ -26,6 +34,20 @@ const MyPodcast = () => {
    setOpenSearchModal(false);
   };
 
+const onPlay = (id) => {
+  if (activePlayer && activePlayer !== id && activePlayer.audio && activePlayer.audio.current) {
+    activePlayer.audio.current.pause();
+  }
+  setActivePlayer(id);
+};
+
+const onPause = (id) => {
+  if (activePlayer === id && activePlayer.audio && activePlayer.audio.current) {
+    setActivePlayer(null);
+  }
+};
+
+
    const formatDuration = (duration_ms) => {
     const totalSeconds = duration_ms / 1000;
     const hours = Math.floor(totalSeconds / 3600);
@@ -33,45 +55,49 @@ const MyPodcast = () => {
     return `${hours}小時${minutes}分`;
   };
  
-   const fetchCategoryData = async () => {
-    try {
-      const data = await getCategory();
-      const selectedCategory = data.find(item => item.id === id);
-      setCategories(selectedCategory);  
-      console.log('select',selectedCategory); 
-    } catch (error) {
-      console.error(`Error searching podcasts:', ${error.message}`);
-    }
-  };
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const data = await getCategory();
+        const selectedCategory = data.find(item => item.id === id);
+        setCategories(selectedCategory);  
+      } catch (error) {
+        console.error(`Error searching podcasts:', ${error.message}`);
+      }
+    };
 
-   useEffect(() => {
     fetchCategoryData(); 
   }, [id]); 
 
 useEffect(() => {
   if (category.savedShows && category.savedShows.length > 0) {
-    const showIds = category.savedShows.map((show) => show.id.split(':')[2]);
-
-    showIds.forEach(async (id) => {
-       try {
-        const data = await getShow(id);
-        // 检查是否已经存在于podCast数组中
-        if (!podCast.find(p => p.id === data.id)) {
-          setPodcast((prevPodcast) => [...prevPodcast, data]);
-        }
-      } catch (error) {
-        console.error(error);
+    const showIds = category.savedShows.map((show) => {
+      if (show && typeof show.id === 'string' && show.id.includes(':')) {
+        return { id: show.id.split(':')[2] };
       }
+      return show; // 返回原始对象
     });
 
-    console.log(podCast);
+    const fetchData = async (id) => {
+      try {
+        return await getShow(id.id);
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    };
+
+    Promise.all(showIds.map(fetchData))
+      .then((results) => {
+        // 检查更新是否是由 category.savedShows 引起的
+        if (!isEqual(podCast, results)) {
+          setPodcast(results);
+        }
+      })
+      .catch((error) => console.error(error));
   }
-}, [category.savedShows]);
-
-useEffect(() => {
-  // console.log(podCast);
-}, [podCast]);
-
+}, [category.savedShows, podCast]);
+console.log('pct',podCast)
 
   return (
     <>
@@ -100,22 +126,30 @@ useEffect(() => {
               <img src={p.images[1].url} alt="img" style={{height:'6rem',width:'6rem',borderRadius:'0.5rem'}}/>
               </div>
 
-            <div className="podcast-info-container d-flex mt-3" style={{flexDirection:'column',alignItems:'flex-start'}}>
+            <div className="podcast-info-container d-flex mt-3 mr-2" style={{flexDirection:'column',alignItems:'flex-start'}}>
               <h3 className="podcast-title" style={{fontWeight:'700'}}>{p.name}</h3>
-              <p className="podcast-author" style={{fontSize:'0.875rem'}}>{p.publisher}</p>
-              <p className="podcast-description" style={{fontSize:'0.875rem'}}>{p.description.substring(0,100)}...</p>
+              <p className="podcast-description mt-2" style={{fontSize:'0.875rem',color:'var(--main-blue-grey)',paddingRight:'0.5rem'}}>{p.description.substring(0,100)}...</p>
 
-                <div className="podcast-player">
-                      <p>時長: {formatDuration(p.episodes.items[0].duration_ms)}</p>
-                      <audio controls>
-                        <source src={p.episodes.items[0].audio_preview_url} type="audio/mpeg" />
-                        您的瀏覽器
-                      </audio>
-                    </div>
+      <div className="podcast-player d-flex w-50">
+          <AudioPlayer
+          className='audio-play w-50 h-50'
+           key={p.id}
+          autoPlay={false}
+          src={p.episodes.items[currentEpisodeIndex].audio_preview_url}
+          onPlay={() => onPlay(p.id)} 
+          onPause={() => onPause(null)}
+          showJumpControls={false}
+          showFilledProgress={false}
+          showDownloadProgress={false}
+          />
+          <div className="podcast-time d-flex" style={{alignItems:'center',fontSize:'0.85rem',color:'var(--main-blue-grey)'}}>
+          <h6>{p.episodes.items[currentEpisodeIndex].release_date}</h6>
+          <span>．</span>
+          <h6 className='title'>{formatDuration(p.episodes.items[currentEpisodeIndex].duration_ms)}</h6>
+          </div>
+
+        </div>
             </div>
-
-
-
               
             </div>
           ))}
@@ -132,22 +166,12 @@ useEffect(() => {
     
     <div className="search-btn col-6" style={{marginLeft:'2.2rem'}}>
       <Button onClick={handleOpenSearch}>新增PodCast</Button>
-      {openSearchModal && <SearchPodcast show={openSearchModal} onClose={handleCloseSearch} />
+      {openSearchModal && <SearchPodcast show={openSearchModal} onClose={handleCloseSearch} category={setCategories}/>
       }
 
       {error && <p>{error}</p>}    
     </div>
-
-
-    
-
-
- </div>
-
-
-      
-
-    
+    </div>
     </div>
     </>
   );

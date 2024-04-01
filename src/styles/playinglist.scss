@@ -67,3 +67,47 @@
     color: var(--grey-400);
   }
 }
+
+.podcast-info-container{
+.rhap_container {
+    box-shadow: none !important;
+    max-width: 50px;
+    .rhap_main {
+      max-width: 50px;
+      .rhap_progress-section {
+        .rhap_current-time {
+          display: none;
+        }
+
+        .rhap_progress-container {
+          display: none;
+        }
+
+        .rhap_time {
+          display: none;
+        }
+      }
+
+      .rhap_controls-section {
+        margin-top: 0;
+        flex-direction: row-reverse;
+        padding-left: 2rem;
+        .rhap_additional-controls {
+          .rhap_button-clear {
+            display: none;
+          }
+        }
+        .rhap_main-controls{
+          .rhap_button-clear{
+            color: var(--main-orange-light);
+          }
+        }
+        .rhap_volume-controls {
+          display: none;
+        }
+      }
+
+    }
+  }
+}
+

@@ -3,9 +3,10 @@ import useApi from '../context/useApi.jsx';
 import { addShow } from '../api/script.js';
 import { searchShow} from '../api/auth.js';
 import { Modal,Button } from 'react-bootstrap';
-import SearchIcon from '../assets/icon/search.svg'
+import SearchIcon from '../assets/icon/search.svg';
+import Swal from 'sweetalert2';
 
-const SearchPodcast = ({show,onClose,id}) => {
+const SearchPodcast = ({show,onClose,category}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(null);
@@ -36,29 +37,50 @@ const SearchPodcast = ({show,onClose,id}) => {
   };
 
 
- const handleCheckAdd = async (itemId) => {
+ const handleCheckAdd = async (showId) => {
   try {
-    const categoryId = 297; 
-    console.log('itemId',itemId);
-    const response = await addShow({ categoryId, itemId }); 
+    const categoryId = category.id; 
+    console.log(categoryId);
+    const response = await addShow({ categoryId, showId }); 
     console.log(response);
     if (response) {
       setSearchResults([]);
       setSearchTerm('');
-      setSelectedItems([]);
+      setSelectedItems();
       onClose();
+      Swal.fire({
+        title: '成功！',
+        text: '已添加PodCast至收藏',
+        icon: 'success',
+        timer: 2000, 
+        showConfirmButton: false, 
+      });
     } else {
       console.error('Failed to add show');
+        Swal.fire({
+        title: '失敗！',
+        text: '出現未知錯誤',
+        icon: 'warning',
+        timer: 2000, 
+        showConfirmButton: false, 
+      });
     }
   } catch (error) {
     console.error(`Error adding show:', ${error.message}`);
     setError(error.message);
-    setSelectedItems([]);
+    setSelectedItems();
+     Swal.fire({
+        title: '失敗！',
+        text: '出現未知錯誤',
+        icon: 'warning',
+        timer: 2000, 
+        showConfirmButton: false, 
+      });
   }
 };
 
-const handleSelectItem = (itemId) => {
-  setSelectedItems([itemId]); 
+const handleSelectItem = (showId) => {
+  setSelectedItems(showId); 
 };
 
 
